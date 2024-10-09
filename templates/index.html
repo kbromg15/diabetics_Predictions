@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+/*
+The form and display templates for a web application that forecasts diabetes outcomes based on
+user input are contained in this HTML file. The form and result display are formatted using
+fundamental CSS styling.
+*/
+< ! -- https://www.w3schools.com/tags/tag_doctype.asp -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Diabetes Prediction</title>
+    <style>
+      /* CSS styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      form {
+        margin: 0 auto;
+        width: 500px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+
+      .error {
+        color: red;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Diabetes Prediction</h1>
+    <form method="POST" action="/predict">
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required>
+
+      <label for="glucose">Glucose:</label>
+      <input type="number" id="glucose" name="glucose" required>
+
+      <label for="bmi">BMI:</label>
+      <input type="number" id="bmi" name="bmi" required>
+
+      <label for="insulin">Insulin:</label>
+      <input type="number" id="insulin" name="insulin" required>
+
+      <label for="bp">Blood Pressure:</label>
+      <input type="number" id="bp" name="bp" required>
+
+      <label for="skin">Skin Thickness:</label>
+      <input type="number" id="skin" name="skin" required>
+
+      <label for="pregnancies">Pregnancies:</label>
+      <input type="number" id="pregnancies" name="pregnancies" required>
+
+      <label for="dpf">Diabetes Pedigree Function:</label>
+      <input type="number" id="dpf" name="dpf" required>
+
+      <input type="submit" value="Predict">
+    </form>
+
+    <!-- Display the result from the server -->
+    {% if result %}
+    <div class="result">
+      <h2>Result</h2>
+      <p>{{ result }}</p>
+    </div>
+    {% endif %}
+
+
+    <!-- Display any errors returned from the server -->
+    {% if errors %}
+    <div class="error">
+      <h2>Errors</h2>
+      <ul>
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </body>
+</html>
